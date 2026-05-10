@@ -67,7 +67,7 @@ const Login = () => {
         <input
           type="email"
           name="email"
-          placeholder="Enter Email"
+          placeholder="for admin email: fatma@gmail.com"
           value={formData.email}
           onChange={handleChange}
           className="w-full p-4 rounded-xl bg-black/30 border border-cyan-500/30 text-white mb-5 outline-none"
@@ -77,7 +77,7 @@ const Login = () => {
         <input
           type="password"
           name="password"
-          placeholder="Enter Password"
+          placeholder="1234"
           value={formData.password}
           onChange={handleChange}
           className="w-full p-4 rounded-xl bg-black/30 border border-cyan-500/30 text-white mb-6 outline-none"
