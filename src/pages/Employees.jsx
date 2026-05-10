@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import API from "../utils/API";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,7 +16,8 @@ const Employees = () => {
   const fetchEmployees = async () => {
     try {
       const res = await API.get("/employees");
-      const data = res.data?.employees || res.data?.data || res.data || [];
+      const data =
+        res.data?.employees || res.data?.data || res.data || [];
       setEmployees(Array.isArray(data) ? data : []);
     } catch (error) {
       console.log("Employee fetch error:", error);
@@ -57,98 +58,67 @@ const Employees = () => {
 
   return (
     <div className="flex bg-[#050816] min-h-screen text-white">
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/60 z-20 md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+      <Sidebar />
+      <div className="flex-1 md:ml-[260px] ml-0 px-4 pt-16 pb-8 md:px-8 md:pt-8">
+        <Navbar />
 
-      <div
-        className={`fixed top-0 left-0 h-full z-30 transition-transform duration-300 md:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <Sidebar />
-      </div>
-
-      <div className="flex-1 md:ml-[260px] min-w-0">
-        <div className="flex items-center gap-3 p-4 md:hidden">
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 p-2 rounded-xl"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-          <span className="text-cyan-400 font-bold text-lg">HR Panel</span>
-        </div>
-
-        <div className="hidden md:block">
-          <Navbar />
-        </div>
-
-        <div className="p-4 md:p-8">
-          <h1 className="text-2xl md:text-4xl font-bold text-cyan-400 mb-6 md:mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-6 mt-2 md:mt-0"
+        >
+          <h1 className="text-2xl md:text-5xl font-bold text-cyan-400">
             Employees
           </h1>
+          <p className="text-gray-400 mt-1 text-sm md:text-base">
+            Manage your workforce
+          </p>
+        </motion.div>
 
-          <div className="bg-[#0f172a] rounded-3xl border border-cyan-500/20 p-3 md:p-6 overflow-hidden">
-            <div className="overflow-x-auto w-full">
-              <table className="w-full text-left text-sm md:text-base min-w-[500px]">
-                <thead>
-                  <tr className="text-cyan-400 border-b border-cyan-500/20">
-                    <th className="p-3 md:p-4">Name</th>
-                    <th className="p-3 md:p-4">Email</th>
-                    <th className="p-3 md:p-4 hidden sm:table-cell">Role</th>
-                    <th className="p-3 md:p-4 hidden md:table-cell">Department</th>
-                    <th className="p-3 md:p-4">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {employees.length > 0 ? (
-                    employees.map((emp) => (
-                      <tr
-                        key={emp._id}
-                        className="border-b border-gray-700 hover:bg-cyan-500/5"
+        <div className="overflow-x-auto bg-white/5 rounded-2xl border border-cyan-500/20 p-3 md:p-6">
+          <table className="w-full text-left text-sm md:text-base min-w-[480px]">
+            <thead>
+              <tr className="text-cyan-400 border-b border-cyan-500/20">
+                <th className="p-3 md:p-4">Name</th>
+                <th className="p-3 md:p-4">Email</th>
+                <th className="p-3 md:p-4 hidden sm:table-cell">Role</th>
+                <th className="p-3 md:p-4 hidden md:table-cell">Department</th>
+                <th className="p-3 md:p-4">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {employees.length > 0 ? (
+                employees.map((emp, index) => (
+                  <motion.tr
+                    key={emp._id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="border-b border-gray-700 hover:bg-cyan-500/5"
+                  >
+                    <td className="p-3 md:p-4 font-medium">{emp.name}</td>
+                    <td className="p-3 md:p-4 text-gray-300 break-all">{emp.email}</td>
+                    <td className="p-3 md:p-4 text-gray-300 hidden sm:table-cell">{emp.role}</td>
+                    <td className="p-3 md:p-4 text-gray-300 hidden md:table-cell">{emp.department}</td>
+                    <td className="p-3 md:p-4">
+                      <button
+                        onClick={() => deleteEmployee(emp._id)}
+                        className="bg-red-500 hover:bg-red-600 px-3 py-1.5 rounded-xl text-sm transition-colors"
                       >
-                        <td className="p-3 md:p-4 font-medium">{emp.name}</td>
-                        <td className="p-3 md:p-4 text-gray-300 break-all">{emp.email}</td>
-                        <td className="p-3 md:p-4 hidden sm:table-cell text-gray-300">{emp.role}</td>
-                        <td className="p-3 md:p-4 hidden md:table-cell text-gray-300">{emp.department}</td>
-                        <td className="p-3 md:p-4">
-                          <button
-                            onClick={() => deleteEmployee(emp._id)}
-                            className="bg-red-500 hover:bg-red-600 px-3 py-1.5 md:px-4 md:py-2 rounded-xl text-sm transition-colors"
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="5" className="text-center p-6 text-gray-400">
-                        No Employees Found
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
+                        Delete
+                      </button>
+                    </td>
+                  </motion.tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="text-center p-6 text-gray-400">
+                    No Employees Found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
