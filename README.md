@@ -1,16 +1,110 @@
-# React + Vite
+# 🏢 Smart HRMS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack **Human Resource Management System** with role-based access control, built with React, Node.js, and MongoDB Atlas.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [smart-hrms.vercel.app](https://smart-hrms-project-b9lx.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 👑 Admin
+- View all employees & add new ones
+- Approve or reject leave requests
+- View attendance records of all employees
+- Access full dashboard with analytics
 
-## Expanding the ESLint configuration
+### 👤 Employee
+- Mark daily attendance (Present / Absent / Leave)
+- Apply for leave via form
+- Edit own profile
+- View personal dashboard
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+> ⚠️ Employees cannot access Admin routes. Role-based protection is enforced on both frontend and backend.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Tech |
+|-------|------|
+| Frontend | React, Tailwind CSS, Framer Motion |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas |
+| Auth | JWT (JSON Web Tokens) |
+| Deployment | Vercel (Frontend), Render (Backend) |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/Aiman2027/smart-hrms-project.git
+cd smart-hrms-project
+```
+
+### 2. Setup Backend
+
+```bash
+cd backend
+npm install
+```
+
+Create a `.env` file in `/backend`:
+
+```env
+MONGO_URI=your_mongodb_atlas_uri
+JWT_SECRET=your_jwt_secret
+PORT=5000
+```
+
+```bash
+npm start
+```
+
+### 3. Setup Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+## 🔐 Test Credentials
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | fatma@gmail.com | 1234 |
+
+---
+
+## 📁 Project Structure
+
+```
+smart-hrms-project/
+├── backend/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   └── server.js
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── utils/
+│   └── index.html
+```
+
+---
+
+## 👨‍💻 Author
+
+**Aiman** — [GitHub](https://github.com/Aiman2027)
+
+---
+
+⭐ If you like this project, give it a star!
