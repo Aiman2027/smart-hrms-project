@@ -32,7 +32,7 @@ A full-stack **Human Resource Management System** with role-based access control
 | Backend | Node.js, Express.js |
 | Database | MongoDB Atlas |
 | Auth | JWT (JSON Web Tokens) |
-| Deployment | Vercel (Frontend), Render (Backend) |
+| Deployment | Vercel |
 
 ---
 
