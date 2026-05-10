@@ -12,15 +12,11 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 dotenv.config();
 
 const app = express();
-
-
-
-app.use(express.json());
 app.use(cors({
   origin: "*",
   credentials: false
 }));
-
+app.use(express.json());
 connectDB();
 
 // Routes
