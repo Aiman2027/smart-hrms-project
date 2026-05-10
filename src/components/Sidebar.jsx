@@ -77,13 +77,6 @@ const Sidebar = () => {
             </NavLink>
           ))}
         </div>
-
-        <div className="absolute bottom-6 left-6 right-6">
-          <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-center">
-            <p className="text-cyan-400 text-xs font-bold">HRMS Pro</p>
-            <p className="text-gray-500 text-xs mt-1">Admin Panel</p>
-          </div>
-        </div>
       </div>
     </>
   );
