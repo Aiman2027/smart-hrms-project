@@ -27,15 +27,15 @@ const Sidebar = () => {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden fixed top-4 left-4 z-50 bg-cyan-500 text-black p-2 rounded-xl shadow-lg"
+        className="md:hidden fixed top-3 left-3 z-50 bg-cyan-500 text-black p-2.5 rounded-xl shadow-lg"
       >
-        {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+        {isOpen ? <FaTimes size={18} /> : <FaBars size={18} />}
       </button>
 
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="md:hidden fixed inset-0 bg-black/60 z-30"
+          className="md:hidden fixed inset-0 bg-black/70 z-30 backdrop-blur-sm"
         />
       )}
 
