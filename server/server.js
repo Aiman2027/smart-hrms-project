@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-
 import authRoutes from "./routes/auth.js";
 import employeeRoutes from "./routes/employeeRoutes.js";
 import attendanceRoutes from "./routes/attendanceRoutes.js";
@@ -10,7 +9,6 @@ import leaveRoutes from "./routes/leaveRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 dotenv.config();
-
 const app = express();
 
 app.use(cors({
@@ -22,7 +20,15 @@ app.use(cors({
 
 app.use(express.json());
 
-connectDB();
+// Ensure DB is connected before any request proceeds
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Database connection failed" });
+  }
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/employees", employeeRoutes);
