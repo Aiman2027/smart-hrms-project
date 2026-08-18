@@ -13,14 +13,12 @@ dotenv.config();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "https://smart-hrms-project-b9lx.vercel.app",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: false
-  })
-);
+app.use(cors({
+  origin: "https://smart-hrms-project-b9lx.vercel.app",
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: false
+}));
 
 app.use(express.json());
 
