@@ -70,6 +70,7 @@ const Login = () => {
           placeholder="for admin email: fatma@gmail.com"
           value={formData.email}
           onChange={handleChange}
+          autoComplete="off"
           className="w-full p-4 rounded-xl bg-black/30 border border-cyan-500/30 text-white mb-5 outline-none"
         />
 
@@ -80,6 +81,7 @@ const Login = () => {
           placeholder="1234"
           value={formData.password}
           onChange={handleChange}
+          autoComplete="off"
           className="w-full p-4 rounded-xl bg-black/30 border border-cyan-500/30 text-white mb-6 outline-none"
         />
 
