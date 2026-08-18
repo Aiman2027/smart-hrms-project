@@ -20,7 +20,7 @@ app.use(cors({
 
 app.use(express.json());
 
-// Ensure DB is connected before any request proceeds
+
 app.use(async (req, res, next) => {
   try {
     await connectDB();
