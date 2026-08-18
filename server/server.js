@@ -13,40 +13,18 @@ dotenv.config();
 
 const app = express();
 
-const allowedOrigins = [
-  "https://smart-hrms-project-b9lx.vercel.app",
-  "http://localhost:5173",
-  "http://localhost:3000"
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-     
-      if (!origin) {
-        return callback(null, true);
-      }
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error("Not allowed by CORS"));
-    },
-    credentials: true,
+    origin: "https://smart-hrms-project-b9lx.vercel.app",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: false
   })
 );
 
-
-app.options("*", cors());
-
 app.use(express.json());
 
-
 connectDB();
-
 
 app.use("/api/auth", authRoutes);
 app.use("/api/employees", employeeRoutes);
